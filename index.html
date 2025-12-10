@@ -1,426 +1,1822 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Oussama Boumedjmâdjène — Développeur Full-Stack (Django • Vue.js)</title>
-  <meta name="description" content="Portfolio moderne, épuré et animé. Développeur full-stack Django/Vue.js : temps réel, APIs REST, WebSocket, déploiement Linux/Nginx, automatisation.">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        fontFamily: { sans: ['Inter','ui-sans-serif','system-ui','-apple-system','Segoe UI','Roboto','Ubuntu','Cantarell','Noto Sans','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji'] },
-        extend: {
-          colors: {
-            brand: {
-              50:'#eef9ff',100:'#d6f0ff',200:'#b0e0ff',300:'#7ecbff',400:'#49b0ff',
-              500:'#1f96ff',600:'#0c7ae6',700:'#065fb8',800:'#084e90',900:'#0a4276'
-            }
-          },
-          boxShadow: {
-            glow: '0 8px 40px rgba(31,150,255,.25)'
-          },
-          keyframes: {
-            floaty:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-6px)'}},
-            fadeUp:{'0%':{opacity:0,transform:'translateY(24px)'},'100%':{opacity:1,transform:'translateY(0)'}}
-          },
-          animation: {
-            floaty:'floaty 6s ease-in-out infinite',
-            fadeUp:'fadeUp .7s both'
-          }
-        }
+  <meta charset="UTF-8">
+  <title>Plombier d’Urgence & Dépannage | Votre Plombier de Confiance</title>
+
+  <!-- SEO de base -->
+  <meta name="description" content="Plombier d’urgence 7j/7, dépannage rapide, installation et rénovation de plomberie. Devis gratuit, intervention en moins de 30 minutes selon disponibilité.">
+  <meta name="keywords" content="plombier, plomberie, dépannage plomberie, urgence plombier, fuite d’eau, débouchage, chauffe-eau, installation salle de bain">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph (réseaux sociaux) -->
+  <meta property="og:title" content="Plombier d’Urgence & Dépannage | Votre Plombier de Confiance">
+  <meta property="og:description" content="Plombier professionnel pour dépannage rapide, installation, rénovation et entretien. Devis gratuit, intervention rapide.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.votreplombier.fr/">
+  <meta property="og:image" content="https://www.votreplombier.fr/images/preview-plombier.jpg">
+
+  <!-- Données structurées LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Plumber",
+    "name": "Votre Plombier de Confiance",
+    "image": "https://www.votreplombier.fr/images/preview-plombier.jpg",
+    "url": "https://www.votreplombier.fr/",
+    "telephone": "+33 6 12 34 56 78",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "12 Rue des Artisans",
+      "addressLocality": "VotreVille",
+      "postalCode": "75000",
+      "addressCountry": "FR"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/votreplombier",
+      "https://www.instagram.com/votreplombier"
+    ]
+  }
+  </script>
+
+  <!-- Police moderne (optionnel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #0f7ae5;
+      --color-primary-dark: #0753a8;
+      --color-accent: #00c3a5;
+      --color-bg: #050816;
+      --color-bg-soft: #0b1220;
+      --color-bg-card: #0f172a;
+      --color-text: #e5e7eb;
+      --color-muted: #9ca3af;
+      --shadow-soft: 0 20px 40px rgba(15, 23, 42, 0.7);
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --transition-fast: 0.2s ease-in-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      color: var(--color-text);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout général */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    footer {
+      flex-shrink: 0;
+    }
+
+    /* Header / Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.70), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #e5f2ff, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: white;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.4), 0 12px 24px rgba(15,23,42,0.7);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-muted);
+      padding: 6px 8px;
+      border-radius: 999px;
+      transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+      background-color: rgba(15,118,110,0.16);
+      transform: translateY(-1px);
+    }
+
+    .nav-links a.nav-link-active {
+      color: #f9fafb;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-phone {
+      font-size: 13px;
+      color: var(--color-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-phone span {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.4);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.5);
+      filter: brightness(1.05);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.7);
+    }
+
+    .burger {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .burger-line {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      position: relative;
+    }
+
+    .burger-line::before,
+    .burger-line::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      transition: transform var(--transition-fast), top var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .burger-line::before {
+      top: -6px;
+    }
+
+    .burger-line::after {
+      top: 6px;
+    }
+
+    .burger-open .burger-line {
+      background: transparent;
+    }
+
+    .burger-open .burger-line::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .burger-open .burger-line::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    /* Menu mobile */
+    .mobile-menu {
+      display: none;
+      padding: 0 16px 12px;
+    }
+
+    .mobile-menu-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeDown 0.2s ease-out;
+    }
+
+    .mobile-menu a {
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--color-muted);
+      font-weight: 500;
+    }
+
+    .mobile-menu a:hover {
+      background-color: rgba(31, 41, 55, 0.9);
+      color: #f9fafb;
+    }
+
+    .mobile-menu .btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
-  </script>
-  <style>
-    .reveal {opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
-    .reveal.on {opacity:1; transform:translateY(0);}
-    .glass {backdrop-filter: saturate(140%) blur(10px); background: rgba(255,255,255,.65);}
-    .dark .glass {background: rgba(13,18,28,.45);}
-    .mask-gradient {mask-image: radial-gradient(1200px 600px at 50% 0%, #000 40%, transparent 100%);}
+
+    /* Hero */
+    .hero-section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 30px 16px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: rgba(15, 118, 110, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a5f3fc;
+      margin-bottom: 10px;
+    }
+
+    .eyebrow-pill {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f9fafb, #22c55e);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 4vw, 38px);
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(120deg, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--color-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 8px 16px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--color-text);
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(30, 64, 175, 0.8);
+      border-color: rgba(129, 140, 248, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    .hero-note b {
+      color: #e5e7eb;
+    }
+
+    .hero-right-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #0ea5e9 0, #0b1120 40%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right-card::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(96, 165, 250, 0.22) 0, transparent 40%),
+        radial-gradient(circle at 100% 0, rgba(52, 211, 153, 0.25) 0, transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.35) 0, transparent 45%);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .hero-right-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-mini-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e0f2fe;
+      margin-bottom: 4px;
+    }
+
+    .hero-metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-metric-main {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f9fafb;
+    }
+
+    .hero-metric-sub {
+      font-size: 12px;
+      color: #e5e7eb;
+      max-width: 180px;
+    }
+
+    .hero-metric-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .hero-grid-card {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 8px 10px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero-grid-label {
+      color: #9ca3af;
+      font-size: 11px;
+    }
+
+    .hero-grid-value {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .hero-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .hero-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.9);
+      color: white;
+      font-size: 11px;
+    }
+
+    /* Sections génériques */
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 22px 16px 32px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--color-muted);
+      max-width: 460px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #6ee7b7;
+    }
+
+    /* Services */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.15), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 16px 30px rgba(15, 23, 42, 0.8);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 40px rgba(15, 23, 42, 0.9);
+      border-color: rgba(96, 165, 250, 0.8);
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 30%, #dbeafe, #1d4ed8);
+      font-size: 18px;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.7);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    .card-list {
+      margin-top: 4px;
+      list-style: none;
+      padding-left: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .card-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .card-list li span {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    /* Section Urgence */
+    .emergency-section {
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      background: radial-gradient(circle at top left, rgba(239, 68, 68, 0.25), #020617);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      box-shadow: 0 18px 40px rgba(127, 29, 29, 0.7);
+      display: grid;
+      grid-template-columns: 2.2fr 2fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .emergency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(127, 29, 29, 0.9);
+      color: #fee2e2;
+      margin-bottom: 8px;
+    }
+
+    .emergency-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .emergency-text {
+      font-size: 13px;
+      color: #fee2e2;
+      margin-bottom: 12px;
+    }
+
+    .emergency-phone {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fee2e2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .emergency-phone span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fecaca;
+    }
+
+    .emergency-tagline {
+      font-size: 12px;
+      color: #fecaca;
+    }
+
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+      color: #fee2e2;
+    }
+
+    .emergency-small-card {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 250, 252, 0.2);
+      padding: 8px;
+    }
+
+    .emergency-label {
+      font-size: 11px;
+      color: #fca5a5;
+      margin-bottom: 2px;
+    }
+
+    /* Devis & Tarifs */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+    }
+
+    .text-block {
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+
+    .text-block p + p {
+      margin-top: 8px;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .price-card {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    .price-name {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .price-range {
+      color: #e5e7eb;
+    }
+
+    .price-note {
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+
+    /* Formulaires */
+    .form-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 12px;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.85);
+    }
+
+    .form-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    .form-label span {
+      color: #f97316;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 8px 10px;
+      font-size: 13px;
+      color: var(--color-text);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(148, 163, 184, 0.7);
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: rgba(59, 130, 246, 0.9);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.7);
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .form-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .form-status {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    .form-status-success {
+      color: #4ade80;
+    }
+
+    .form-status-error {
+      color: #fb7185;
+    }
+
+    /* À propos & Avis */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+    }
+
+    .about-text {
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    .about-text p + p {
+      margin-top: 8px;
+    }
+
+    .list-check {
+      margin-top: 10px;
+      list-style: none;
+      padding-left: 0;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .list-check li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 5px;
+    }
+
+    .list-check li span {
+      font-size: 15px;
+      line-height: 20px;
+      color: #22c55e;
+    }
+
+    .reviews-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 12px;
+    }
+
+    .stars {
+      color: #facc15;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .review-text {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: 6px;
+    }
+
+    .review-author {
+      font-size: 12px;
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .review-meta {
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .reviews-small {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .reviews-kpi {
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 8px;
+      text-align: center;
+    }
+
+    .reviews-kpi strong {
+      font-size: 16px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Contact */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+    }
+
+    .contact-info-block {
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 12px;
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+
+    .info-row {
+      margin-bottom: 6px;
+    }
+
+    .info-label {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .info-value {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .info-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .info-badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      background: linear-gradient(to top, #020617, #020617e6);
+      padding: 16px;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    .footer-badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 960px) {
+      .hero-section {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+
+      .hero-right-card {
+        order: -1;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .emergency-section {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+
+      .split-layout,
+      .about-layout,
+      .contact-layout {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .hero-section {
+        padding-top: 18px;
+      }
+
+      .section {
+        padding-top: 18px;
+        padding-bottom: 24px;
+      }
+
+      .card-grid {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+
+      .emergency-section {
+        padding: 12px;
+      }
+
+      .form-row {
+        grid-template-columns: minmax(0, 1.1fr);
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
-
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 selection:bg-brand-500/20 selection:text-brand-700">
-  <header class="sticky top-0 z-40 border-b border-slate-200/60 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/60 glass">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="h-16 flex items-center justify-between">
-        <a href="#" class="flex items-center gap-3">
-          <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-300 shadow-glow"></div>
-          <span class="font-extrabold tracking-tight text-lg">Oussama<span class="text-brand-600">.dev</span></span>
-        </a>
-        <nav class="hidden md:flex items-center gap-6">
-          <a href="#accueil" class="hover:text-brand-600">Accueil</a>
-          <a href="#apropos" class="hover:text-brand-600">À propos</a>
-          <a href="#competences" class="hover:text-brand-600">Compétences</a>
-          <a href="#projets" class="hover:text-brand-600">Projets</a>
-          <a href="#experience" class="hover:text-brand-600">Expérience</a>
-          <a href="#contact" class="px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700">Contact</a>
-        </nav>
-        <div class="flex items-center gap-2">
-          <button id="themeToggle" aria-label="Basculer thème" class="h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 grid place-items-center">
-            <svg id="sun" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.84 17.24l-1.79 1.8 1.79 1.79 1.8-1.79-1.8-1.8zM20 11V9h-3v2h3zm-8-8h-2v3h2V3zm7.16 2.84l-1.79-1.79-1.8 1.79 1.8 1.79 1.79-1.79zM12 6a6 6 0 100 12 6 6 0 000-12zm6.76 10.48l1.8 1.79-1.8 1.8-1.79-1.8 1.79-1.79z"/></svg>
-            <svg id="moon" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
-          </button>
-          <button id="menuBtn" class="md:hidden h-10 w-10 rounded-lg border border-slate-200 dark:border-slate-800 grid place-items-center">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-          </button>
+<body>
+<div class="page-wrapper">
+  <header>
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-logo">P</div>
+        <div class="brand-text">
+          <div class="brand-name">Plombier d’Urgence</div>
+          <div class="brand-tagline">Dépannage 7j/7 & Devis instantané</div>
         </div>
       </div>
-      <div id="mobileNav" class="md:hidden hidden pb-4">
-        <div class="grid gap-2">
-          <a href="#accueil" class="px-4 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900">Accueil</a>
-          <a href="#apropos" class="px-4 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900">À propos</a>
-          <a href="#competences" class="px-4 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900">Compétences</a>
-          <a href="#projets" class="px-4 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900">Projets</a>
-          <a href="#experience" class="px-4 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900">Expérience</a>
-          <a href="#contact" class="px-4 py-2 rounded-lg bg-brand-600 text-white hover:bg-brand-700">Contact</a>
+
+      <nav class="nav-links">
+        <a href="#accueil" class="nav-link nav-link-active">Accueil</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#urgence" class="nav-link">Urgence</a>
+        <a href="#devis" class="nav-link">Devis & tarifs</a>
+        <a href="#apropos" class="nav-link">À propos & avis</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <div class="nav-phone">
+          24h/24 &nbsp;•&nbsp; <span>06 12 34 56 78</span>
         </div>
+        <button class="btn-primary" data-scroll="#devis">
+          Demander un devis
+        </button>
+        <button class="burger" aria-label="Menu" id="burger-button">
+          <div class="burger-line"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-inner">
+        <a href="#accueil" class="mobile-link">Accueil</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#urgence" class="mobile-link">Urgence</a>
+        <a href="#devis" class="mobile-link">Devis & tarifs</a>
+        <a href="#apropos" class="mobile-link">À propos & avis</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <button class="btn-primary" data-scroll="#devis">
+          Devis en ligne
+        </button>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="accueil" class="relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none mask-gradient">
-        <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full bg-gradient-to-b from-brand-500/20 to-transparent blur-3xl"></div>
-      </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div class="reveal on lg:reveal">
-            <p class="uppercase tracking-widest text-sm text-brand-700/80">Développeur Full-Stack</p>
-            <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mt-3">Oussama Boumedjmâdjène</h1>
-            <p class="mt-6 text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
-              Spécialisé en Python/Django, Vue.js, systèmes temps réel (WebSocket/Redis), APIs REST, automatisation, et déploiement Linux/Nginx.
-              Conception d’ERP Web & Mobile modulaires pour l’activité fibre optique particuliers.
-            </p>
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href="#projets" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-glow">Voir les projets</a>
-              <a href="#contact" class="px-5 py-3 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Me contacter</a>
-            </div>
-            <div class="mt-8 flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-              <span>📧 oussama4448@gmail.com</span>
-              <span>📱 +213 790 70 05 18</span>
-              <a href="https://www.linkedin.com/in/oussama-boumedjmadjene-837b8724b/" target="_blank" class="underline underline-offset-4 decoration-brand-500 hover:text-brand-600">LinkedIn</a>
-              <a href="https://github.com/Osatch" target="_blank" class="underline underline-offset-4 decoration-brand-500 hover:text-brand-600">GitHub</a>
-            </div>
-          </div>
-          <div class="relative">
-            <div class="aspect-square bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200/70 dark:border-slate-800/90 overflow-hidden shadow-2xl">
-              <div class="absolute inset-0 grid place-items-center">
-                <div class="w-64 h-64 rounded-full bg-gradient-to-tr from-brand-500 to-brand-300 animate-floaty"></div>
-              </div>
-              <div class="absolute bottom-6 left-6 right-6 grid grid-cols-3 gap-3">
-                <div class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 backdrop-blur-md text-xs">Django • DRF • JWT</div>
-                <div class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 backdrop-blur-md text-xs">Vue.js • Vite • Axios</div>
-                <div class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 backdrop-blur-md text-xs">WebSocket • Redis • Nginx</div>
-              </div>
-            </div>
-          </div>
+    <!-- Accueil / Hero -->
+    <section id="accueil" class="hero-section">
+      <div>
+        <div class="eyebrow">
+          <div class="eyebrow-pill"></div>
+          Plombier agréé • Intervention rapide
         </div>
-      </div>
-    </section>
-
-    <section id="apropos" class="py-20 lg:py-28">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        <h2 class="text-3xl font-extrabold">À propos</h2>
-        <p class="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed reveal">
-          Développeur full-stack orienté résultats, je construis des produits fiables et performants. Je travaille sur des architectures pragmatiques,
-          des interfaces claires, et des pipelines de données robustes. Mon focus : valeur métier, qualité, maintenabilité, temps réel, et déploiements propres.
+        <h1 class="hero-title">
+          Plombier <span class="hero-highlight">d’urgence et de confiance</span><br>
+          pour tous vos problèmes d’eau.
+        </h1>
+        <p class="hero-subtitle">
+          Fuite, canalisation bouchée, chauffe-eau en panne, rénovation complète de salle de bain :
+          nous intervenons rapidement pour sécuriser, réparer et vous accompagner, sans mauvaises surprises.
         </p>
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/50 reveal">
-            <div class="text-sm text-slate-500">Spécialité</div>
-            <div class="mt-1 font-semibold">Django • Vue.js</div>
+
+        <div class="hero-badges">
+          <div class="badge">
+            <div class="badge-dot"></div>
+            Dépannage 7j/7
           </div>
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/50 reveal">
-            <div class="text-sm text-slate-500">Temps réel</div>
-            <div class="mt-1 font-semibold">Channels • WebSocket • Redis</div>
+          <div class="badge">
+            <div class="badge-dot"></div>
+            Devis clair avant intervention
           </div>
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/50 reveal">
-            <div class="text-sm text-slate-500">Automatisation</div>
-            <div class="mt-1 font-semibold">Selenium • CSV/Excel</div>
+          <div class="badge">
+            <div class="badge-dot"></div>
+            Garantie main-d’œuvre & pièces
           </div>
-          <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/50 reveal">
-            <div class="text-sm text-slate-500">Infra</div>
-            <div class="mt-1 font-semibold">Ubuntu • Nginx • SSL</div>
-          </div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" data-scroll="#contact">
+            Appeler un plombier
+          </button>
+          <button class="btn-secondary" data-scroll="#devis">
+            Estimer mon intervention
+          </button>
+        </div>
+
+        <div class="hero-note">
+          <b>Transparence totale :</b> chaque déplacement est précédé d’un devis détaillé, validé avec vous par téléphone ou e-mail.
         </div>
       </div>
-    </section>
 
-    <section id="competences" class="py-20 lg:py-28 bg-slate-50 dark:bg-slate-900">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="flex items-end justify-between gap-6">
-          <h2 class="text-3xl font-extrabold">Compétences</h2>
-          <div class="text-sm text-slate-500 dark:text-slate-400">Mises à jour en continu</div>
-        </div>
-        <div class="mt-10 grid md:grid-cols-3 gap-8">
-          <div class="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 reveal">
-            <div class="font-bold text-lg">Back-end</div>
-            <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300">
-              <li>Django, DRF, Auth JWT/Refresh, RBAC</li>
-              <li>Channels, WebSocket, Redis</li>
-              <li>MySQL/MariaDB, optimisation requêtes</li>
-              <li>Imports CSV/Excel, e-mail texte + PJ</li>
-            </ul>
-          </div>
-          <div class="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 reveal">
-            <div class="font-bold text-lg">Front-end</div>
-            <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300">
-              <li>Vue.js (Options/Composition), Vite</li>
-              <li>Interfaces de tableaux riches</li>
-              <li>Filtres, pagination, modales d’édition</li>
-              <li>WebSocket client, états temps réel</li>
-            </ul>
-          </div>
-          <div class="p-6 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 reveal">
-            <div class="font-bold text-lg">Ops & Automatisation</div>
-            <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300">
-              <li>Ubuntu/Nginx, Uvicorn/Gunicorn, SSL</li>
-              <li>Selenium WebDriver, Regex</li>
-              <li>Monitoring simple, scripts de maintenance</li>
-              <li>CI légères, bonnes pratiques sécurité</li>
-            </ul>
-          </div>
-        </div>
-        <div class="mt-10">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Django</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">DRF</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Channels</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Vue.js</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Vite</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Redis</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">MySQL</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Nginx</div>
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-sm reveal">Selenium</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projets" class="py-20 lg:py-28">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        <div class="flex items-end justify-between">
-          <h2 class="text-3xl font-extrabold">Projets</h2>
-          <div class="flex gap-2">
-            <button data-filter="all" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Tous</button>
-            <button data-filter="web" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Web</button>
-            <button data-filter="realtime" class="px-4 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">Temps réel</button>
-          </div>
-        </div>
-
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-xl transition reveal" data-tags="web,realtime">
-            <div class="relative">
-              <div class="aspect-[16/10] bg-gradient-to-br from-brand-500/15 to-slate-200 dark:to-slate-800 grid place-items-center">
-                <span class="text-sm text-brand-700">ERP Web & Mobile (fibre)</span>
-              </div>
-              <div class="absolute top-3 left-3 px-2 py-1 text-xs rounded-md bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">Django • Vue</div>
-            </div>
-            <div class="p-5">
-              <h3 class="font-bold group-hover:text-brand-600">Système ERP temps réel</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Gestion interventions, suivi terrain, facturation, recrutement, inventaire, échanges live.</p>
-              <div class="mt-4 flex gap-2">
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">WebSocket</span>
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Redis</span>
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Nginx</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-xl transition reveal" data-tags="web">
-            <div class="relative">
-              <div class="aspect-[16/10] bg-gradient-to-br from-emerald-500/15 to-slate-200 dark:to-slate-800 grid place-items-center">
-                <span class="text-sm text-emerald-700">Stats & tableaux</span>
-              </div>
-              <div class="absolute top-3 left-3 px-2 py-1 text-xs rounded-md bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">Vue</div>
-            </div>
-            <div class="p-5">
-              <h3 class="font-bold group-hover:text-emerald-600">Dashboards comparatifs</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">OK vs NOK, catégories d’échec, exports Excel avec formats/couleurs.</p>
-              <div class="mt-4 flex gap-2">
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Excel</span>
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Pagination</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-xl transition reveal" data-tags="web">
-            <div class="relative">
-              <div class="aspect-[16/10] bg-gradient-to-br from-fuchsia-500/15 to-slate-200 dark:to-slate-800 grid place-items-center">
-                <span class="text-sm text-fuchsia-700">Scraping</span>
-              </div>
-              <div class="absolute top-3 left-3 px-2 py-1 text-xs rounded-md bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800">Python</div>
-            </div>
-            <div class="p-5">
-              <h3 class="font-bold group-hover:text-fuchsia-600">Collecte Selenium</h3>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Filtres numéros 06/07, tous départements, export Excel structuré.</p>
-              <div class="mt-4 flex gap-2">
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Selenium</span>
-                <span class="px-2 py-1 text-xs rounded-md bg-slate-100 dark:bg-slate-800">Regex</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="py-20 lg:py-28 bg-slate-50 dark:bg-slate-900">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        <h2 class="text-3xl font-extrabold">Expérience</h2>
-        <div class="mt-10 space-y-8">
-          <div class="reveal">
-            <div class="flex items-center justify-between">
-              <div class="font-bold">Candle Call — Développeur logiciels</div>
-              <div class="text-sm text-slate-500">mars 2025 – aujourd’hui</div>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mt-2">Développement d’un ERP Web & Mobile modulaire en temps réel (fibre optique particuliers) : interventions, terrain, facturation, recrutement, inventaire, échanges live.</p>
-          </div>
-          <div class="reveal">
-            <div class="flex items-center justify-between">
-              <div class="font-bold">ubc — Freelance</div>
-              <div class="text-sm text-slate-500">oct. 2024 – fév. 2025</div>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mt-2">Scraping Selenium, filtrage numéros 06/07, export Excel (colonne Département).</p>
-          </div>
-          <div class="reveal">
-            <div class="flex items-center justify-between">
-              <div class="font-bold">École Supérieure des Transmissions 1RN</div>
-              <div class="text-sm text-slate-500">janv. 2023 – sept. 2024</div>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mt-2">Service national : intégration Odoo, automatisations.</p>
-          </div>
-          <div class="reveal">
-            <div class="flex items-center justify-between">
-              <div class="font-bold">SGS Béjaïa</div>
-              <div class="text-sm text-slate-500">juil. 2022 – sept. 2023</div>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300 mt-2">Outils internes, maintenance, automatisations.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="py-20 lg:py-28">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6">
-        <h2 class="text-3xl font-extrabold">Contact</h2>
-        <p class="mt-4 text-slate-600 dark:text-slate-300">Réponse rapide. Tous les champs sont requis.</p>
-        <form id="contactForm" class="mt-10 grid gap-5">
-          <div class="grid sm:grid-cols-2 gap-5">
+      <aside class="hero-right-card" aria-label="Indicateurs de confiance">
+        <div class="hero-right-content">
+          <div class="hero-mini-title">Votre confort, notre priorité</div>
+          <div class="hero-metric-row">
             <div>
-              <label class="block text-sm mb-2">Nom</label>
-              <input name="name" type="text" required class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-500" />
+              <div class="hero-metric-main">98% de clients satisfaits</div>
+              <div class="hero-metric-sub">
+                Basé sur les avis collectés après intervention (débouchage, réparation, installation).
+              </div>
+            </div>
+            <div class="hero-metric-tag">Avis vérifiés</div>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-grid-card">
+              <div class="hero-grid-label">Temps moyen d’intervention</div>
+              <div class="hero-grid-value">&lt; 45 minutes</div>
+              <div class="hero-grid-label">Selon disponibilité et zone d’intervention.</div>
+            </div>
+            <div class="hero-grid-card">
+              <div class="hero-grid-label">Urgence & rendez-vous</div>
+              <div class="hero-grid-value">7j/7</div>
+              <div class="hero-grid-label">Plage horaire élargie pour s’adapter à votre emploi du temps.</div>
+            </div>
+            <div class="hero-grid-card">
+              <div class="hero-grid-label">Interventions réalisées</div>
+              <div class="hero-grid-value">+1500 / an</div>
+              <div class="hero-grid-label">En domicile, bureaux, commerces et copropriétés.</div>
+            </div>
+            <div class="hero-grid-card">
+              <div class="hero-grid-label">Zone d’intervention</div>
+              <div class="hero-grid-value">VotreVille & alentours</div>
+              <div class="hero-grid-label">Centre-ville, périphérie et communes voisines.</div>
+            </div>
+          </div>
+
+          <div class="hero-status-row">
+            <div class="hero-status-pill">
+              ● Plombier disponible aujourd’hui
             </div>
             <div>
-              <label class="block text-sm mb-2">E-mail</label>
-              <input name="email" type="email" required class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-500" />
+              <span style="color:#a5f3fc;">Besoin d’un avis ?</span> Envoyez-nous des photos par e-mail et obtenez une première estimation gratuite.
             </div>
           </div>
-          <div>
-            <label class="block text-sm mb-2">Sujet</label>
-            <input name="subject" type="text" required class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-500" />
-          </div>
-          <div>
-            <label class="block text-sm mb-2">Message</label>
-            <textarea name="message" rows="6" required class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
-          </div>
-          <div class="flex items-center gap-3">
-            <button type="submit" class="px-6 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 disabled:opacity-50" id="sendBtn">Envoyer</button>
-            <a id="mailtoFallback" class="text-sm underline underline-offset-4 decoration-brand-500 hidden">Ou envoyer via votre boîte mail</a>
-          </div>
-          <div id="toast" class="hidden mt-4 text-sm px-4 py-3 rounded-xl"></div>
-        </form>
-        <div class="mt-10 text-sm text-slate-500 dark:text-slate-400">
-          E-mail direct : <a href="mailto:oussama4448@gmail.com" class="underline decoration-brand-500">oussama4448@gmail.com</a>
         </div>
+      </aside>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Services de plomberie</div>
+          <h2 class="section-title">Tout ce qu’il faut pour une plomberie saine et durable.</h2>
+          <p class="section-subtitle">
+            De l’urgence à la rénovation complète, nous vous accompagnons du diagnostic à la finition, en passant par le conseil.
+          </p>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-icon">💧</div>
+          <h3 class="card-title">Dépannage & urgence</h3>
+          <p class="card-text">
+            Fuite d’eau, dégât des eaux, évier ou WC bouchés : nous sécurisons les lieux et rétablissons la situation en priorité.
+          </p>
+          <ul class="card-list">
+            <li><span>•</span> Recherche & réparation de fuites visibles ou encastrées.</li>
+            <li><span>•</span> Débouchage de canalisations, colonnes, siphons.</li>
+            <li><span>•</span> Mise en sécurité et conseil pour éviter un nouveau sinistre.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🚿</div>
+          <h3 class="card-title">Installation & rénovation</h3>
+          <p class="card-text">
+            Création ou rénovation de salle de bain, cuisine, buanderie : nous assurons un travail propre, aligné sur vos usages.
+          </p>
+          <ul class="card-list">
+            <li><span>•</span> Pose de douches, baignoires, meubles vasques & robinetterie.</li>
+            <li><span>•</span> Rénovation de réseaux d’alimentation & évacuation.</li>
+            <li><span>•</span> Coordination avec autres corps de métier sur demande.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">🔥</div>
+          <h3 class="card-title">Chauffe-eau & confort</h3>
+          <p class="card-text">
+            Un ballon qui tombe en panne, de l’eau tiède, un débit irrégulier ? Nous intervenons et vous guidons vers la bonne solution.
+          </p>
+          <ul class="card-list">
+            <li><span>•</span> Dépannage & remplacement de chauffe-eau électrique.</li>
+            <li><span>•</span> Entretien, détartrage & mise en conformité.</li>
+            <li><span>•</span> Optimisation de la consommation & du confort.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Urgence -->
+    <section id="urgence" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Urgence plomberie</div>
+          <h2 class="section-title">Une fuite ? Une canalisation bouchée ? Ne perdez pas une minute.</h2>
+          <p class="section-subtitle">
+            Plus vous agissez rapidement, plus vous limitez les dégâts. Nous priorisons les urgences pour sécuriser votre logement ou votre local.
+          </p>
+        </div>
+      </div>
+
+      <div class="emergency-section">
+        <div>
+          <div class="emergency-badge">
+            Alerte fuite ou dégât des eaux
+          </div>
+          <h3 class="emergency-title">Un plombier peut être dépêché rapidement selon votre secteur.</h3>
+          <p class="emergency-text">
+            Coupez l’eau, prenez quelques photos, et appelez-nous : nous analysons la situation, estimons le coût et planifions immédiatement l’intervention.
+          </p>
+          <div class="emergency-phone">
+            06 12 34 56 78
+            <span>(numéro direct plombier)</span>
+          </div>
+          <div class="emergency-tagline">
+            Ligne prioritaire en cas de fuite active, d’odeur suspecte ou de risque de dégât des eaux.
+          </div>
+        </div>
+
+        <div class="emergency-grid">
+          <div class="emergency-small-card">
+            <div class="emergency-label">Les bons réflexes avant notre arrivée</div>
+            <div>
+              • Fermez le robinet d’arrêt principal.<br>
+              • Protégez vos biens sensibles (électricité, meubles).<br>
+              • Notez l’origine visible de la fuite si possible.
+            </div>
+          </div>
+          <div class="emergency-small-card">
+            <div class="emergency-label">Ce que nous faisons sur place</div>
+            <div>
+              • Diagnostic précis et réparation immédiate si possible.<br>
+              • Devis détaillé avant toute intervention lourde.<br>
+              • Compte-rendu pour assurance si nécessaire.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Devis & Tarifs -->
+    <section id="devis" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Devis & estimation</div>
+          <h2 class="section-title">Un devis clair, sans surprise, avant chaque intervention.</h2>
+          <p class="section-subtitle">
+            Expliquez-nous votre besoin, joignez éventuellement des photos, et recevez une estimation transparente par e-mail ou téléphone.
+          </p>
+        </div>
+      </div>
+
+      <div class="split-layout">
+        <div>
+          <div class="text-block">
+            <p>
+              Chaque situation est différente : une fuite accessible n’a pas le même coût qu’une recherche de fuite encastrée,
+              une robinetterie standard n’a pas le même prix qu’un modèle haut de gamme.
+            </p>
+            <p>
+              C’est pourquoi nous fonctionnons <b>au cas par cas</b>, sur la base de photos, d’une description précise
+              et, si besoin, d’une première visite de diagnostic.
+            </p>
+          </div>
+
+          <div class="price-grid">
+            <div class="price-card">
+              <div class="price-name">Déplacement & diagnostic</div>
+              <div class="price-range">à partir de 49€ TTC</div>
+              <div class="price-note">Déductible en cas d’acceptation du devis.</div>
+            </div>
+            <div class="price-card">
+              <div class="price-name">Dépannage courant</div>
+              <div class="price-range">entre 90€ et 220€ TTC</div>
+              <div class="price-note">Fuite simple, débouchage, petite réparation.</div>
+            </div>
+            <div class="price-card">
+              <div class="price-name">Installation / rénovation</div>
+              <div class="price-range">sur devis détaillé</div>
+              <div class="price-note">Salle de bain, cuisine, réseaux complets.</div>
+            </div>
+            <div class="price-card">
+              <div class="price-name">Contrats d’entretien</div>
+              <div class="price-range">formule sur mesure</div>
+              <div class="price-note">Copropriété, locaux pros, gestion locative.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-card">
+            <h3 class="form-title">Demande de devis en ligne</h3>
+            <p class="form-hint">
+              Décrivez votre besoin et nous vous recontactons avec une estimation gratuite. Les champs marqués d’un <span>*</span> sont obligatoires.
+            </p>
+            <form id="quote-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Nom complet <span>*</span></label>
+                  <input type="text" name="name" class="form-input" placeholder="Ex : Dupont Martin">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">E-mail <span>*</span></label>
+                  <input type="email" name="email" class="form-input" placeholder="vous@example.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Téléphone <span>*</span></label>
+                  <input type="tel" name="phone" class="form-input" placeholder="06 12 34 56 78">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Code postal / Ville <span>*</span></label>
+                  <input type="text" name="city" class="form-input" placeholder="75000 Paris">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Type de besoin <span>*</span></label>
+                <select name="service" class="form-select">
+                  <option value="">Choisissez un type d’intervention</option>
+                  <option value="urgence">Urgence (fuite, dégât des eaux, canalisation bouchée)</option>
+                  <option value="installation">Installation (sanitaires, robinetterie, chauffe-eau…)</option>
+                  <option value="renovation">Rénovation salle de bain / cuisine</option>
+                  <option value="autre">Autre besoin (précisez ci-dessous)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Description du problème <span>*</span></label>
+                <textarea name="message" class="form-textarea" placeholder="Expliquez le contexte, ce que vous constatez, l’ancienneté du problème, etc."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Urgence estimée</label>
+                <select name="urgency" class="form-select">
+                  <option value="">Sélectionnez</option>
+                  <option value="immediat">Fuite / Urgence immédiate</option>
+                  <option value="48h">Intervention souhaitée sous 24/48h</option>
+                  <option value="semaine">Intervention à planifier dans la semaine</option>
+                  <option value="etude">Étude de projet / rénovation</option>
+                </select>
+              </div>
+
+              <div class="form-footer">
+                <div class="form-status" id="quote-status"></div>
+                <button type="submit" class="btn-primary">
+                  Envoyer ma demande
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- À propos & Avis -->
+    <section id="apropos" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Confiance & témoignages</div>
+          <h2 class="section-title">Un plombier de proximité, recommandé par ses clients.</h2>
+          <p class="section-subtitle">
+            Notre priorité : intervenir rapidement, laisser les lieux propres et vous expliquer ce que nous faisons,
+            avant, pendant et après l’intervention.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-layout">
+        <div>
+          <div class="about-text">
+            <p>
+              Artisan plombier, nous avons construit notre réputation sur la <b>transparence</b>, la <b>pédagogie</b>
+              et la <b>fiabilité</b>. Pas de jargon incompréhensible, pas de devis approximatif : chaque intervention est expliquée et justifiée.
+            </p>
+            <p>
+              Nous intervenons en habitat individuel, collectif, locaux commerciaux et bureaux, en lien avec les
+              syndics, agences immobilières et gestionnaires de patrimoine lorsque nécessaire.
+            </p>
+          </div>
+
+          <ul class="list-check">
+            <li><span>✓</span> Devis détaillé et validé avant toute intervention.</li>
+            <li><span>✓</span> Interventions planifiées pour limiter au maximum votre indisponibilité.</li>
+            <li><span>✓</span> Matériel sélectionné pour sa fiabilité et sa durabilité.</li>
+            <li><span>✓</span> Explications claires sur les gestes de prévention à adopter.</li>
+          </ul>
+        </div>
+
+        <aside class="reviews-card">
+          <div class="stars">★★★★★</div>
+          <div class="review-text">
+            « Intervention ultra rapide pour une fuite sous évier. Tout m’a été expliqué clairement, photos à l’appui.
+            Devis respecté au centime près, je recommande. »
+          </div>
+          <div class="review-author">Claire M.</div>
+          <div class="review-meta">Intervention fuite cuisine • VotreVille</div>
+
+          <div class="reviews-small">
+            <div class="reviews-kpi">
+              <strong>4,9/5</strong>
+              Note moyenne sur les avis clients vérifiés.
+            </div>
+            <div class="reviews-kpi">
+              <strong>+1500</strong>
+              Interventions réalisées sans litige ni surprise de facturation.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Contact & prise de rendez-vous</div>
+          <h2 class="section-title">Parlez-nous de votre projet ou de votre urgence.</h2>
+          <p class="section-subtitle">
+            Utilisez le formulaire ci-dessous ou contactez-nous directement par téléphone.
+            Nous revenons vers vous dans les meilleurs délais.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-layout">
+        <div>
+          <div class="form-card">
+            <h3 class="form-title">Formulaire de contact</h3>
+            <p class="form-hint">
+              Pour une urgence, privilégiez l’appel téléphonique. Pour un projet, décrivez votre besoin le plus précisément possible.
+            </p>
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Nom complet <span>*</span></label>
+                  <input type="text" name="name" class="form-input" placeholder="Nom & prénom">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">E-mail <span>*</span></label>
+                  <input type="email" name="email" class="form-input" placeholder="vous@example.com">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Téléphone</label>
+                  <input type="tel" name="phone" class="form-input" placeholder="Facultatif mais recommandé">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Objet du message <span>*</span></label>
+                  <input type="text" name="subject" class="form-input" placeholder="Ex : fuite salle de bain, projet rénovation...">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Message <span>*</span></label>
+                <textarea name="message" class="form-textarea" placeholder="Expliquez votre situation, vos disponibilités, etc."></textarea>
+              </div>
+
+              <div class="form-footer">
+                <div class="form-status" id="contact-status"></div>
+                <button type="submit" class="btn-primary">
+                  Envoyer mon message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <aside class="contact-info-block">
+          <div class="info-row">
+            <div class="info-label">Téléphone</div>
+            <div class="info-value">06 12 34 56 78</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">E-mail</div>
+            <div class="info-value">contact@votreplombier.fr</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Adresse</div>
+            <div class="info-value">12 Rue des Artisans, 75000 VotreVille</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Horaires habituels</div>
+            <div class="info-value">Lundi – Vendredi : 8h00 – 19h00<br>Samedi & Dimanche : sur rendez-vous</div>
+          </div>
+
+          <div class="info-badges">
+            <div class="info-badge">Intervention domicile & locaux pros</div>
+            <div class="info-badge">Devis gratuit hors déplacement</div>
+            <div class="info-badge">Partenariats syndics & agences</div>
+          </div>
+        </aside>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-slate-200 dark:border-slate-800 py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="text-sm text-slate-500 dark:text-slate-400">© <span id="year"></span> Oussama Boumedjmâdjène. Tous droits réservés.</div>
-      <div class="flex items-center gap-4 text-sm">
-        <a href="https://www.linkedin.com/in/oussama-boumedjmadjene-837b8724b/" target="_blank" class="hover:text-brand-600">LinkedIn</a>
-        <a href="https://github.com/Osatch" target="_blank" class="hover:text-brand-600">GitHub</a>
-        <a href="#contact" class="hover:text-brand-600">Contact</a>
+  <footer>
+    <div class="footer-inner">
+      <div>
+        © <span id="year"></span> Votre Plombier de Confiance – Tous droits réservés.
+      </div>
+      <div class="footer-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-badge">
+        Site optimisé pour le référencement local & la prise de contact rapide.
       </div>
     </div>
   </footer>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    const root = document.documentElement;
-    const key = 'theme';
-    function setTheme(t){ if(t==='dark'){document.documentElement.classList.add('dark');} else {document.documentElement.classList.remove('dark');} localStorage.setItem(key,t); }
-    function initTheme(){ const t = localStorage.getItem(key) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); setTheme(t); document.getElementById('sun').classList.toggle('hidden', !(t==='light')); document.getElementById('moon').classList.toggle('hidden', t==='light'); }
-    document.getElementById('themeToggle').addEventListener('click',()=>{ const isDark = document.documentElement.classList.contains('dark'); setTheme(isDark?'light':'dark'); document.getElementById('sun').classList.toggle('hidden', !isDark); document.getElementById('moon').classList.toggle('hidden', isDark); });
-    initTheme();
+<script>
+  // Année dynamique
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    document.getElementById('menuBtn').addEventListener('click',()=>{ document.getElementById('mobileNav').classList.toggle('hidden'); });
+  // Navigation active / smooth scroll
+  function smoothScrollTo(targetSelector) {
+    var target = document.querySelector(targetSelector);
+    if (!target) return;
+    var headerOffset = 70;
+    var elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    var offsetPosition = elementPosition - headerOffset;
 
-    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} })},{threshold:.15});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
 
-    const filters = document.querySelectorAll('[data-filter]');
-    const cards = document.querySelectorAll('[data-tags]');
-    filters.forEach(btn=>btn.addEventListener('click',()=>{
-      const f = btn.getAttribute('data-filter');
-      filters.forEach(b=>b.classList.remove('bg-brand-600','text-white')); btn.classList.add('bg-brand-600','text-white');
-      cards.forEach(c=>{
-        const tags = c.getAttribute('data-tags').split(',');
-        c.classList.toggle('hidden', !(f==='all' || tags.includes(f)));
-      });
-    }));
+  document.querySelectorAll('[data-scroll]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var selector = btn.getAttribute('data-scroll');
+      smoothScrollTo(selector);
+    });
+  });
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('a.nav-link, .mobile-link').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        event.preventDefault();
+        smoothScrollTo(href);
 
-    (function(){ try{ emailjs.init('PUBLIC_KEY_A_RENSEIGNER'); }catch(e){} })();
-
-    const form = document.getElementById('contactForm');
-    const toast = document.getElementById('toast');
-    const sendBtn = document.getElementById('sendBtn');
-    const mailFallback = document.getElementById('mailtoFallback');
-
-    function showToast(msg, ok=true){
-      toast.textContent = msg;
-      toast.className = '';
-      toast.classList.add('mt-4','text-sm','px-4','py-3','rounded-xl', ok?'bg-emerald-100':'bg-rose-100', ok?'text-emerald-800':'text-rose-800', ok?'border-emerald-200':'border-rose-200','border');
-    }
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      const canSend = (typeof emailjs!=='undefined' && emailjs.send);
-      if(!data.name || !data.email || !data.subject || !data.message){ showToast('Veuillez compléter tous les champs.', false); return; }
-      sendBtn.disabled = true;
-
-      if(canSend){
-        try{
-          const serviceId = 'SERVICE_ID';
-          const templateId = 'TEMPLATE_ID';
-          await emailjs.send(serviceId, templateId, {from_name:data.name, from_email:data.email, subject:data.subject, message:data.message, to_email:'oussama4448@gmail.com'});
-          showToast('Message envoyé avec succès.');
-          form.reset();
-          mailFallback.classList.add('hidden');
-        }catch(err){
-          showToast('Échec de l’envoi. Utilisez le lien mail ci-dessous.', false);
-          mailFallback.classList.remove('hidden');
-          mailFallback.href = `mailto:oussama4448@gmail.com?subject=${encodeURIComponent('[Portfolio] '+data.subject)}&body=${encodeURIComponent('Nom: '+data.name+'\nEmail: '+data.email+'\n\n'+data.message)}`;
-        }finally{
-          sendBtn.disabled = false;
-        }
-      } else {
-        showToast('Service direct non configuré. Utilisez le lien mail ci-dessous.', false);
-        mailFallback.classList.remove('hidden');
-        mailFallback.href = `mailto:oussama4448@gmail.com?subject=${encodeURIComponent('[Portfolio] '+data.subject)}&body=${encodeURIComponent('Nom: '+data.name+'\nEmail: '+data.email+'\n\n'+data.message)}`;
-        sendBtn.disabled = false;
+        var links = document.querySelectorAll('a.nav-link');
+        links.forEach(function (lnk) { lnk.classList.remove('nav-link-active'); });
+        var desktopLink = document.querySelector('a.nav-link[href="' + href + '"]');
+        if (desktopLink) desktopLink.classList.add('nav-link-active');
       }
     });
-  </script>
+  });
+
+  // Menu burger
+  var burgerButton = document.getElementById('burger-button');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (burgerButton && mobileMenu) {
+    burgerButton.addEventListener('click', function () {
+      var isOpen = burgerButton.classList.toggle('burger-open');
+      mobileMenu.style.display = isOpen ? 'block' : 'none';
+    });
+
+    mobileMenu.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('click', function () {
+        burgerButton.classList.remove('burger-open');
+        mobileMenu.style.display = 'none';
+      });
+    });
+  }
+
+  // Validation simple de formulaire (frontend)
+  function validateRequiredFields(form, fields) {
+    var valid = true;
+    fields.forEach(function (selector) {
+      var field = form.querySelector(selector);
+      if (field) {
+        if (!field.value.trim()) {
+          field.style.borderColor = 'rgba(248, 113, 113, 0.9)';
+          valid = false;
+        } else {
+          field.style.borderColor = 'rgba(148, 163, 184, 0.6)';
+        }
+      }
+    });
+    return valid;
+  }
+
+  // Formulaire devis
+  var quoteForm = document.getElementById('quote-form');
+  var quoteStatus = document.getElementById('quote-status');
+
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!validateRequiredFields(quoteForm, ['input[name="name"]', 'input[name="email"]', 'input[name="phone"]', 'input[name="city"]', 'select[name="service"]', 'textarea[name="message"]'])) {
+        quoteStatus.textContent = 'Merci de remplir tous les champs obligatoires.';
+        quoteStatus.classList.remove('form-status-success');
+        quoteStatus.classList.add('form-status-error');
+        return;
+      }
+
+      quoteStatus.textContent = 'Votre demande a été prise en compte. Vous serez recontacté(e) rapidement.';
+      quoteStatus.classList.remove('form-status-error');
+      quoteStatus.classList.add('form-status-success');
+
+      quoteForm.reset();
+    });
+  }
+
+  // Formulaire contact
+  var contactForm = document.getElementById('contact-form');
+  var contactStatus = document.getElementById('contact-status');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!validateRequiredFields(contactForm, ['input[name="name"]', 'input[name="email"]', 'input[name="subject"]', 'textarea[name="message"]'])) {
+        contactStatus.textContent = 'Merci de compléter les champs obligatoires.';
+        contactStatus.classList.remove('form-status-success');
+        contactStatus.classList.add('form-status-error');
+        return;
+      }
+
+      contactStatus.textContent = 'Votre message a bien été envoyé. Nous reviendrons vers vous rapidement.';
+      contactStatus.classList.remove('form-status-error');
+      contactStatus.classList.add('form-status-success');
+
+      contactForm.reset();
+    });
+  }
+
+  /*
+    IMPORTANT POUR L’ENVOI RÉEL DES E-MAILS :
+    ----------------------------------------------------------------
+    Actuellement, les formulaires affichent uniquement un message de succès côté navigateur.
+    Pour envoyer réellement les e-mails ou enregistrer les demandes :
+
+    - soit tu envoies les données vers un script serveur (PHP, Python/Django, Node, etc.)
+      via fetch() ou en action classique du formulaire ;
+    - soit tu utilises un service spécialisé (Formspree, Getform, etc.) en mettant leur URL
+      dans l’attribut action du formulaire.
+
+    Exemple (à adapter côté backend) :
+      fetch('/api/contact/', { method: 'POST', body: JSON.stringify(...), headers: {...} })
+  */
+</script>
 </body>
 </html>
