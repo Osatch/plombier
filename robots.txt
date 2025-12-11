@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://osatch.github.io/plombier/sitemap.xml
